@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface IAccountRepositoryService extends JpaRepository<Account, Long> {
+public interface IAccountRepository extends JpaRepository<Account, Long> {
 
     Account findAccountById(Long id);
 
