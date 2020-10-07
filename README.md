@@ -1,6 +1,7 @@
 # Rest-Excercise
 
-Simple Spring Boot Rest mock up of bank service that allows to create new accounts, retrive them, list them and transfer money between them. 
+Simple Spring Boot Rest App of bank service that allows to create new accounts, retrive them, list them and transfer money between them. 
+For data storage I used in-memory H2 db. 
 
 To start the project just simply clone repository and or import it directly from your IDE download mvn dependencies and run the project. 
 
@@ -8,7 +9,7 @@ Application will be running on port: 8080.
 
 ## Implementation
 
-####Entities: 
+#### Entities: 
 
 Account{
 id: Long,
@@ -17,7 +18,7 @@ currency: Currency,
 balance: double
 } 
 
-####Comments: 
+#### Comments: 
 
 * Currency: I am aware of java.utils.Currency. However decided to implement own enum type for currencies. 
 Consist EURO and DOLAR for simplicity and possible simple conversion during transfers. 
