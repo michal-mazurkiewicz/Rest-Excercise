@@ -3,7 +3,7 @@
 Simple Spring Boot Rest App of bank service that allows to create new accounts, retrive them, list them and transfer money between them. 
 For data storage I used in-memory H2 db. 
 
-To start the project just simply clone repository and or import it directly from your IDE download mvn dependencies and run the project. 
+To start the project just simply clone repository or import it directly from your IDE. Download mvn dependencies and run the project. 
 
 Application will be running on port: 8080.
 
