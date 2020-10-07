@@ -19,9 +19,9 @@ public class TransferService implements ITransferService {
 
 
     @Override
-    public String transfer(Long fromID, Long toID, double amount) {
+    public int transfer(Long fromID, Long toID, double amount) {
         if(amount < 0){
-            return "Error: Amount must be positive number";
+            return 0;
         }
 
         Account fromAccount = accountRepository.findAccountById(fromID);
@@ -35,10 +35,10 @@ public class TransferService implements ITransferService {
 
             accountRepository.save(fromAccount);
             accountRepository.save(toAccount);
-            return "OK: Transfer completed!";
+            return 1;
         }
 
-        return "Transfer failure";
+        return 0;
     }
 
     private boolean isTransferPossible(Account fromAccount, Account toAccount, double amount){

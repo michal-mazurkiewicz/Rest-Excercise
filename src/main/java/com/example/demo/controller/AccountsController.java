@@ -5,12 +5,14 @@ import com.example.demo.model.Account;
 import com.example.demo.service.IAccountService;
 import com.example.demo.service.ITransferService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/accounts")
+@RequestMapping(value = "/rest")
 public class AccountsController {
 
     private final IAccountService accountService;
@@ -23,25 +25,29 @@ public class AccountsController {
         this.transferService = transferService;
     }
 
-    @PostMapping
-    public void createAccount(@RequestBody Account account){
+    @PostMapping(value = "/account")
+    public ResponseEntity createAccount(@RequestBody Account account){
         accountService.createAccount(account);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "getbyid/{id}")
-    public Account getAccountById(@PathVariable Long id){
-        return accountService.getAccountById(id);
+    @GetMapping(value = "/account")
+    public ResponseEntity<Account> getAccountById(@RequestParam Long id){
+        Account account = accountService.getAccountById(id);
+        return account == null ?  ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.ok(account);
     }
 
-    @GetMapping
-    public List<Account> getAllAccounts(){
-       return accountService.getAllAccounts();
+    @GetMapping(value = "/accounts")
+    public ResponseEntity<List> getAllAccounts(){
+       List<Account> accountList = accountService.getAllAccounts();
+        return accountList == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.ok(accountList);
     }
 
 
     @PostMapping(value = "/transfer")
-    public String transfer(@RequestBody TransferDto transfer){
-       return transferService.transfer(transfer.getIdFrom(), transfer.getIdTo(), transfer.getAmount());
+    public ResponseEntity transfer(@RequestBody TransferDto transfer){
+       int code = transferService.transfer(transfer.getIdFrom(), transfer.getIdTo(), transfer.getAmount());
+       return code == 1 ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
 }

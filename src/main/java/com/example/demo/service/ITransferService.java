@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import org.springframework.http.ResponseEntity;
+
 public interface ITransferService {
 
-    String transfer(Long idFrom, Long idTo, double amount);
+    int transfer(Long idFrom, Long idTo, double amount);
 }
