@@ -34,12 +34,11 @@ Service implemented to enable transfers from different currencies.
 
 * Create new Account: 
 
-        POST localhost:8080/api/accounts
+        POST localhost:8080/rest/account
         
         REQUEST BODY EXAMPLE:
         
         {
-            "id":2,
             "name":"Michal",
             "currency":"Euro",
             "balance":150.00,
@@ -48,15 +47,15 @@ Service implemented to enable transfers from different currencies.
         
 * Get Account by id: 
 
-        GET localhost:8080/api/accounts/getbyid/1
+        GET localhost:8080/rest/account?id=1
     
 * Get All Accounts: 
 
-        GET localhost:8080/api/accounts
+        GET localhost:8080/rest/accounts
         
 * Transfer money: 
 
-        POST localhost:8080/api/accounts/transfer
+        POST localhost:8080/rest/transfer
         
         REQUEST BODY EXAMPLE: 
         
