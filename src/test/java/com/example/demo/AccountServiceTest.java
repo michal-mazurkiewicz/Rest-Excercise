@@ -22,7 +22,6 @@ public class AccountServiceTest {
 
     private AccountService accountService;
 
-
     @BeforeEach
     public void setUp(){
         MockitoAnnotations.initMocks(this);

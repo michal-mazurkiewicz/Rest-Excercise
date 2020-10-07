@@ -20,13 +20,14 @@ public class TransferService implements ITransferService {
 
     @Override
     public int transfer(Long fromID, Long toID, double amount) {
-        if(amount < 0){
+        if (amount < 0) {
             return 0;
         }
 
         Account fromAccount = accountRepository.findAccountById(fromID);
         Account toAccount = accountRepository.findAccountById(toID);
-        if(isTransferPossible(fromAccount, toAccount, amount)){
+
+        if (isTransferPossible(fromAccount, toAccount, amount)) {
             double fromBalance = fromAccount.getBalance();
             double toBalance = toAccount.getBalance();
             double exchangeRate = getExchangeRate(fromAccount, toAccount);
@@ -41,8 +42,8 @@ public class TransferService implements ITransferService {
         return 0;
     }
 
-    private boolean isTransferPossible(Account fromAccount, Account toAccount, double amount){
-        if(fromAccount != null && toAccount != null){
+    private boolean isTransferPossible(Account fromAccount, Account toAccount, double amount) {
+        if (fromAccount != null && toAccount != null) {
             return hasEnoughtMoney(fromAccount, amount) || isTreasury(fromAccount);
         }
         return false;
@@ -56,9 +57,9 @@ public class TransferService implements ITransferService {
         return fromAccount.isTreasury();
     }
 
-    private double getExchangeRate(Account fromAccount, Account toAccount){
-        if(fromAccount.getCurrency() == toAccount.getCurrency())
+    private double getExchangeRate(Account fromAccount, Account toAccount) {
+        if (fromAccount.getCurrency() == toAccount.getCurrency())
             return 1;
-        return toAccount.getCurrency() == Currency.EURO ? (1/ Constans.EUR_TO_DOL) : Constans.EUR_TO_DOL;
+        return toAccount.getCurrency() == Currency.EURO ? (1 / Constans.EUR_TO_DOL) : Constans.EUR_TO_DOL;
     }
 }
