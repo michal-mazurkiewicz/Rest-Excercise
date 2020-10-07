@@ -4,6 +4,6 @@ CREATE TABLE ACCOUNTS (
             id varchar auto_increment primary key,
             name varchar2,
             currency enum('EURO', 'DOLAR'),
-            money double,
+            balance double,
             treasury boolean
 );

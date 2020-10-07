@@ -31,7 +31,7 @@ public class TransferService implements ITransferService {
             double toBalance = toAccount.getBalance();
             double exchangeRate = getExchangeRate(fromAccount, toAccount);
             fromAccount.setBalance(fromBalance - amount);
-            toAccount.setBalance(fromBalance + amount * exchangeRate);
+            toAccount.setBalance(toBalance + amount * exchangeRate);
 
             accountRepository.save(fromAccount);
             accountRepository.save(toAccount);
