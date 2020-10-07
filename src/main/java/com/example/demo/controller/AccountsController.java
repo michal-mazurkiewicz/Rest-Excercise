@@ -28,15 +28,16 @@ public class AccountsController {
         accountService.createAccount(account);
     }
 
+    @GetMapping(value = "getbyid/{id}")
+    public Account getAccountById(@PathVariable Long id){
+        return accountService.getAccountById(id);
+    }
+
     @GetMapping
     public List<Account> getAllAccounts(){
        return accountService.getAllAccounts();
     }
 
-    @GetMapping(path = "{id}")
-    public Account getAccountById(@PathVariable("id") Long id){
-        return accountService.getAccountById(id);
-    }
 
     @PostMapping(value = "/transfer")
     public String transfer(@RequestBody TransferDto transfer){

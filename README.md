@@ -47,7 +47,7 @@ Service implemented to enable transfers from different currencies.
         
 * Get Account by id: 
 
-        GET localhost:8080/api/accounts?id=1 
+        GET localhost:8080/api/accounts/getbyid/1
     
 * Get All Accounts: 
 
