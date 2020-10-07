@@ -3,15 +3,12 @@ package com.example.demo;
 import com.example.demo.model.Account;
 import com.example.demo.model.Currency;
 import com.example.demo.repository.IAccountRepository;
-import com.example.demo.service.AccountService;
 import com.example.demo.service.TransferService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class TransferServiceTest {
