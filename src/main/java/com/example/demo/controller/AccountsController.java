@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.TransferDto;
 import com.example.demo.model.Account;
 import com.example.demo.service.IAccountService;
+import com.example.demo.service.ITransferService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +14,13 @@ import java.util.List;
 public class AccountsController {
 
     private final IAccountService accountService;
+    private final ITransferService transferService;
+
 
     @Autowired
-    public AccountsController(IAccountService accountService) {
+    public AccountsController(IAccountService accountService, ITransferService transferService) {
         this.accountService = accountService;
+        this.transferService = transferService;
     }
 
     @PostMapping
@@ -32,6 +36,11 @@ public class AccountsController {
     @GetMapping(path = "{id}")
     public Account getAccountById(@PathVariable("id") Long id){
         return accountService.getAccountById(id);
+    }
+
+    @PostMapping(value = "/transfer")
+    public String transfer(@RequestBody TransferDto transfer){
+       return transferService.transfer(transfer.getIdFrom(), transfer.getIdTo(), transfer.getAmount());
     }
 
 }
