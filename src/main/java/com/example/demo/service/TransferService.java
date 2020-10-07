@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Account;
+import com.example.demo.model.Constans;
+import com.example.demo.model.Currency;
 import com.example.demo.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +29,9 @@ public class TransferService implements ITransferService {
         if(isTransferPossible(fromAccount, toAccount, amount)){
             double fromBalance = fromAccount.getBalance();
             double toBalance = toAccount.getBalance();
-
+            double exchangeRate = getExchangeRate(fromAccount, toAccount);
             fromAccount.setBalance(fromBalance - amount);
-            toAccount.setBalance(fromBalance + amount);
+            toAccount.setBalance(fromBalance + amount * exchangeRate);
 
             accountRepository.save(fromAccount);
             accountRepository.save(toAccount);
@@ -52,5 +54,11 @@ public class TransferService implements ITransferService {
 
     private boolean isTreasury(Account fromAccount) {
         return fromAccount.isTreasury();
+    }
+
+    private double getExchangeRate(Account fromAccount, Account toAccount){
+        if(fromAccount.getCurrency() == toAccount.getCurrency())
+            return 1;
+        return toAccount.getCurrency() == Currency.EURO ? (1/ Constans.EUR_TO_DOL) : Constans.EUR_TO_DOL;
     }
 }
